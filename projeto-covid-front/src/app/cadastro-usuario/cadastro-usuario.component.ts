@@ -23,7 +23,6 @@ export class CadastrarUsuarioComponent {
   tipoUsuario: string = 'ATENDENTE';
 
   constructor(private service: UsuarioService){
-
   }
 
   cadastrar() {
