@@ -1,0 +1,9 @@
+Para rodar o projeto java: 
+* java -jar app.jar
+
+para rodar o projeto angular: 
+* instalar nodeJs.
+* npm install, ng update, ng serve --open
+
+para subir a imagem docker com o banco de dados
+* docker run --name postgresql -e POSTGRES_PASSWORD=root -e POSTGRES_DB=postgres -p 5432:5432 -d postgres
