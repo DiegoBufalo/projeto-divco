@@ -1,15 +1,16 @@
 
 
-spring:  datasource:    url: jdbc:postgresql://localhost:5433/postgres?schema=filacovid
+spring:  datasource:    url: jdbc:postgresql://localhost:5432/postgres?schema=public
     username: postgres
     password: root
+    initialization-mode: always
+    continue-on-error: true
+    data:    - classpath:data.sql
+    platform: postgresql
   application:    name: projeto-covid
-  
   jpa:
     database: postgresql
-    show-sql: true
-    hibernate:
-      ddl-auto: update
+    hibernate:      ddl-auto: none
       
 server:  port: 8080
   error:    include-stacktrace: on-param

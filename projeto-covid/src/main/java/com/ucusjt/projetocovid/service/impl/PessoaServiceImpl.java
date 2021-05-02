@@ -126,8 +126,8 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	public List<Relatorio> gerarRelatorio() {
-		List<Relatorio> periodoRelatorio = relatorioRepository.findAllByDataBetween(LocalDate.now().minusDays(3),LocalDate.now());
-		return periodoRelatorio;
+		//List<Relatorio> periodoRelatorio = relatorioRepository.findAllByDataBetween(LocalDate.now().minusDays(3),LocalDate.now());
+		return relatorioRepository.findAll();
 	}
 }
 

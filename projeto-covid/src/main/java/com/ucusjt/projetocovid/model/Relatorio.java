@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "teste1", schema = "filacovid")
+@Table(name = "relatorio", schema = "public")
 public class Relatorio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
