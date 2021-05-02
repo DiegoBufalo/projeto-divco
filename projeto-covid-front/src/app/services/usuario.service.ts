@@ -6,22 +6,40 @@ import { Injectable } from "@angular/core";
 @Injectable({
   providedIn: 'root',
 })
+
 export class UsuarioService{
 
   private listaUsuario: any[];
-  private url = 'http://localhost:8080/pessoa';
-  private urlPost = 'http://localhost:8080/pessoa/cadastrar';
+  private baseUrl = 'http://localhost:8080/pessoa';
 
-  constructor(private HttpClient: HttpClient){
-    this.listaUsuario = [];
-  }
+  constructor(private HttpClient: HttpClient){ }
 
-    todas(): Observable<Usuario[]>{
-      return this.HttpClient.get<Usuario[]>(this.url);
+    readAll(): Observable<any>{
+      return this.HttpClient.get(this.baseUrl);
     }
 
-    adicionar(usuario: Usuario): Observable<Usuario>{
-      return  this.HttpClient.post<Usuario>(this.urlPost, usuario);
+    read(id): Observable<any> {
+      return this.HttpClient.get(`${this.baseUrl}/${id}`);
+    }
+
+    create(data): Observable<any> {
+      return this.HttpClient.post(`${this.baseUrl}/cadastrar`, data);
+    }
+  
+    update(id, data): Observable<any> {
+      return this.HttpClient.put(`${this.baseUrl}/atualizar/${id}`, data);
+    }
+  
+    delete(id): Observable<any> {
+      return this.HttpClient.delete(`${this.baseUrl}/deletar/${id}`);
+    }
+  
+    vacinationConfirm(id): Observable<any> {
+      return this.HttpClient.get(`${this.baseUrl}/confirmar/${id}`);
+    }
+
+    queue(): Observable<any> {
+      return this.HttpClient.get(`${this.baseUrl}/fila`);
     }
 
 
