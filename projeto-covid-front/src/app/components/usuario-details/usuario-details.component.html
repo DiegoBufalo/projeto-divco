@@ -1,1 +1,101 @@
-<p>usuario-details works!</p>
+<div style="width: 500px; margin: auto;">
+    <div *ngIf="currentUsuario" class="edit-form">
+      <h4>Usuario</h4>
+      <form>
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nome"
+              required
+              [(ngModel)]="currentUsuario.nome"
+              name="nome"
+            />
+          </div>
+  
+          <div class="form-group">
+              <label for="sobrenome">Sobrenome</label>
+              <input
+                type="text"
+                class="form-control"
+                id="sobrenome"
+                required
+                [(ngModel)]="currentUsuario.sobrenome"
+                name="sobrenome"
+              />
+            </div>
+  
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                required
+                [(ngModel)]="currentUsuario.email"
+                name="email"
+              />
+            </div>
+  
+            <div class="form-group">
+              <label for="tipoUsuario">Tipo de Acesso</label>
+              <select
+                type="text"
+                class="form-control"
+                id="tipoUsuario"
+                required
+                [(ngModel)]="currentUsuario.tipoUsuario"
+                name="tipoUsuario">
+                <option value="ATENDENTE">Usuario</option>
+                <option value="ADMINISTRADOR">Administrador</option>
+              </select>
+            </div>
+    
+          <div class="form-group">
+            <label for="endereco">Endereco(Cep)</label>
+            <input
+              class="form-control"
+              pattern="[0-9]{8}"
+              id="endereco"
+              placeholder="insira seu CEP (somente numeros)"
+              required
+              [(ngModel)]="currentUsuario.endereco"
+              name="endereco"
+            />
+          </div>
+  
+          <div class="form-group">
+              <label for="profSaude">Profissional da Saude ?</label>
+              <select
+                type="text"
+                class="form-control"
+                id="profSaude"
+                required
+                [(ngModel)]="currentUsuario.profSaude"
+                name="profSaude">
+                <option value="false">Nao</option>
+                <option value="true">Sim</option>
+              </select>
+            </div>
+
+      </form>
+      <button class="badge badge-danger mr-2" (click)="deleteUsuario()">
+        Excluir
+      </button>
+  
+      <button
+        type="submit"
+        class="badge badge-success"
+        (click)="updateUsuario()"
+      >
+        Atualizar
+      </button>
+      <p></p>
+    </div>
+  
+    <div *ngIf="!currentUsuario">
+      <br />
+      <p>Usuario Nao Existe</p>
+    </div>
+  </div>

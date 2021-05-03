@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/usuario.service'
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-usuario-details',
-  templateUrl: './usuario-details.component.html',
-  styleUrls: ['./usuario-details.component.css']
+  selector: 'app-usuario-confirmation',
+  templateUrl: './usuario-confirmation.component.html',
+  styleUrls: ['./usuario-confirmation.component.css']
 })
-export class UsuarioDetailsComponent implements OnInit {
+export class UsuarioConfirmationComponent implements OnInit {
 
   currentUsuario = null;
   message = '';
@@ -15,7 +15,8 @@ export class UsuarioDetailsComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.message = '';
@@ -34,24 +35,12 @@ export class UsuarioDetailsComponent implements OnInit {
         });
   }
 
-  updateUsuario(): void {
-    this.usuarioService.update(this.currentUsuario.id, this.currentUsuario)
+  vacineUsuario(): void {
+    this.usuarioService.vacinationConfirm(this.currentUsuario.id)
       .subscribe(
         response => {
           console.log(response);
-          this.router.navigate(['/usuarios'])
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
-  deleteUsuario(): void {
-    this.usuarioService.delete(this.currentUsuario.id)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.router.navigate(['/usuarios']);
+          this.router.navigate(['/fila'])
         },
         error => {
           console.log(error);

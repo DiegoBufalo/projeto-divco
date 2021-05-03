@@ -2,7 +2,6 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -54,7 +53,7 @@ public class PessoaController {
 	
 	@GetMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public Optional<Pessoa> buscarPessoa(@PathVariable Long id) {
+	public List<Pessoa> buscarPessoa(@PathVariable Long id) {
 		return service.buscarPessoa(id);
 	}
 	

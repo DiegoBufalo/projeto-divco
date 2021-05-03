@@ -1,7 +1,6 @@
 package com.ucusjt.projetocovid.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public interface PessoaService {
 	
 	public List<PessoaDto> buscarPessoas();
 	
-	public Optional<Pessoa> buscarPessoa(Long id);
+	public List<Pessoa> buscarPessoa(Long id);
 	
 	public PessoaDto atualizarPessoa(Long 	id, PessoaAtualizarDto pessoa);
 	

@@ -3,7 +3,6 @@ package com.ucusjt.projetocovid.service.impl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -40,9 +39,11 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Pessoa> buscarPessoa(Long id) {
-		Optional<Pessoa> pessoa = repository.findById(id);
-		return pessoa;
+	public List<Pessoa> buscarPessoa(Long id) {
+		List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
+		Pessoa pessoa = repository.findById(id).get();
+		listaPessoa.add(pessoa);
+		return listaPessoa;
 	}
 	
 	

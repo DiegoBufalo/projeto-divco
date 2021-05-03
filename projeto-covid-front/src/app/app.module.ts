@@ -8,13 +8,19 @@ import { AppComponent } from './app.component';
 import { UsuarioCreateComponent } from './components/usuario-create/usuario-create.component';
 import { UsuarioDetailsComponent } from './components/usuario-details/usuario-details.component';
 import { UsuarioListComponent } from './components/usuario-list/usuario-list.component';
+import { UsuarioDeleteComponent } from './components/usuario-delete/usuario-delete.component';
+import { UsuarioQueueComponent } from './components/usuario-queue/usuario-queue.component';
+import { UsuarioConfirmationComponent } from './components/usuario-confirmation/usuario-confirmation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuarioCreateComponent,
     UsuarioDetailsComponent,
-    UsuarioListComponent
+    UsuarioListComponent,
+    UsuarioDeleteComponent,
+    UsuarioQueueComponent,
+    UsuarioConfirmationComponent
   ],
   imports: [
     BrowserModule,

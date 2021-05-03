@@ -1,0 +1,37 @@
+<div style="width: 500px; margin: auto;">
+    <div *ngIf="currentUsuario" class="">
+        <div class="col-md-6">
+              <h4>Confirmar Usuario</h4>
+              <div>
+                <label><strong>Nome: </strong>{{currentUsuario.nome}} {{currentUsuario.sobrenome}}</label>  
+              </div>
+      
+              <div>
+                <label><strong>E-mail: </strong> {{currentUsuario.email}}</label>
+              </div>
+      
+              <div>
+                  <label><strong>Data de Nascimento: </strong>{{currentUsuario.dataNascimento}} </label> 
+              </div>
+      
+               <div>
+                  <label><strong>CPF: </strong>{{currentUsuario.cpf}} </label> 
+               </div>
+              <div>
+                  <label><strong>Profissional da Saude: </strong>{{currentUsuario.profSaude}} </label> 
+              </div>
+      
+              <div>
+                  <label><strong>CEP: </strong>{{currentUsuario.endereco}} </label> 
+              </div>
+      <button class="badge badge-danger mr-2" (click)="vacineUsuario()">
+        Confirmar Vacinacao
+      </button>
+      <p></p>
+    </div>
+  
+    <div *ngIf="!currentUsuario">
+      <br />
+      <p>Usuario Nao Existe</p>
+    </div>
+  </div>
