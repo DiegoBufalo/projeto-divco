@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service'
 
 @Component({
@@ -8,27 +9,28 @@ import { UsuarioService } from 'src/app/services/usuario.service'
 })
 export class UsuarioListComponent implements OnInit {
 
-  usuarios: any;
-  currentUsuario = null;
+  usuario = {} as Usuario;
+  usuarios: Usuario[];
+
+  @Input() currentUsuario = null;
+  
+  
   currentIndex = -1;
-  id = -1;
+  cpf = 0;
 
   constructor(private UsuarioService: UsuarioService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.readUsuarios();
   }
 
-  readUsuarios(): void {
+  readUsuarios() {
       this.UsuarioService.readAll()
       .subscribe(
-        usuarios => {
+        (usuarios: Usuario[]) => {
           this.usuarios = usuarios;
-          console.log(usuarios);
-        },
-          error => {
-            console.log(error);
-          });
+          console.log(usuarios)
+        });
   }
 
   refresh(): void {
@@ -42,12 +44,12 @@ export class UsuarioListComponent implements OnInit {
     this.currentIndex = index;
   }
 
-  searchById(): void {
-    this.UsuarioService.read(this.id)
+  searchByCpf(): void {
+    this.UsuarioService.read(this.cpf)
       .subscribe(
-        usuario => {
-          this.usuarios = usuario;
-          console.log(usuario);
+        usuarioCpf => {
+          this.usuario = usuarioCpf;
+          console.log(usuarioCpf);
         },
         error => {
           console.log(error);

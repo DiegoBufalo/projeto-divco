@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -11,9 +12,12 @@ export class UsuarioQueueComponent implements OnInit {
   usuarios: any;
   currentUsuario = null;
   currentIndex = -1;
-  id = -1;
+  cpf = 0;
 
-  constructor(private UsuarioService: UsuarioService) { }
+  constructor(
+    private UsuarioService: UsuarioService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.readUsuarios();
@@ -42,12 +46,24 @@ setCurrentUsuario(usuario, index): void {
   this.currentIndex = index;
 }
 
-searchById(): void {
-  this.UsuarioService.read(this.id)
+searchByCpf(): void {
+  this.UsuarioService.read(this.cpf)
     .subscribe(
       usuario => {
         this.usuarios = usuario;
         console.log(usuario);
+      },
+      error => {
+        console.log(error);
+      });
+}
+
+vacineUsuario(): void {
+  this.UsuarioService.vacinationConfirm(this.currentUsuario.id)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.router.navigate(['/fila'])
       },
       error => {
         console.log(error);

@@ -4,14 +4,14 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Procurar por id"
-          (ngModel)="id"
+          placeholder="Procurar por cpf"
+          (ngModel)="cpf"
         />
         <div class="input-group-append">
           <button
             class="btn btn-dark"
             type="button"
-            (click)="searchById()"
+            (click)="searchByCpf()"
           >
             Buscar
           </button>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <h4>Ordem de Vacinacao</h4>
+      <h4>Ordem de Vacinação</h4>
       <ul class="list-group">
         <li
           class="list-group-item"
@@ -75,9 +75,9 @@
 
 
         <p>
-            <a class="badge badge-warning" routerLink="/confirmar/{{currentUsuario.id}}">
-              vacinar
-            </a>  
+            <button class="badge badge-danger mr-2" (click)="vacineUsuario()" onClick="window.location.reload();">
+              Confirmar Vacinacao
+            </button> 
         </p>
       </div>
   
@@ -87,4 +87,3 @@
       </div>
     </div>
   </div>
-  

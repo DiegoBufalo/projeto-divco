@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service'
 
 @Component({
@@ -9,8 +10,7 @@ import { UsuarioService } from 'src/app/services/usuario.service'
 })
 export class UsuarioDetailsComponent implements OnInit {
 
-  currentUsuario = null;
-  message = '';
+  currentUsuario: Usuario = null;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -18,43 +18,30 @@ export class UsuarioDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.message = '';
     this.getUsuario(this.route.snapshot.paramMap.get('id'));
   }
 
-  getUsuario(id): void {
+  getUsuario(id): any {
     this.usuarioService.read(id)
       .subscribe(
-        usuario => {
+        (usuario: Usuario) => {
           this.currentUsuario = usuario;
-          console.log(usuario);
-        },
-        error => {
-          console.log(error);
         });
   }
 
   updateUsuario(): void {
-    this.usuarioService.update(this.currentUsuario.id, this.currentUsuario)
+    this.usuarioService.update(this.currentUsuario)
       .subscribe(
         response => {
-          console.log(response);
           this.router.navigate(['/usuarios'])
-        },
-        error => {
-          console.log(error);
         });
   }
 
   deleteUsuario(): void {
-    this.usuarioService.delete(this.currentUsuario.id)
+    this.usuarioService.delete(this.currentUsuario)
       .subscribe(
         response => {
-          console.log(response);
           this.router.navigate(['/usuarios']);
-        },
-        error => {
-          console.log(error);
         });
   }
 

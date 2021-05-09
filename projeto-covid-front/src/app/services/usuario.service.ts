@@ -1,7 +1,8 @@
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Usuario } from './../models/usuario';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -9,38 +10,83 @@ import { Injectable } from "@angular/core";
 
 export class UsuarioService{
 
-  private listaUsuario: any[];
   private baseUrl = 'http://localhost:8080/pessoa';
 
   constructor(private HttpClient: HttpClient){ }
+  
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }
 
-    readAll(): Observable<any>{
-      return this.HttpClient.get(this.baseUrl);
+
+    readAll(): Observable<Usuario[]>{
+      return this.HttpClient.get<Usuario[]>(this.baseUrl)
+        .pipe(
+            retry(2),
+            catchError(this.handleError)
+        );
     }
 
-    read(id): Observable<any> {
-      return this.HttpClient.get(`${this.baseUrl}/${id}`);
+    read(id): Observable<Usuario> {
+      return this.HttpClient.get<Usuario>(this.baseUrl +'/'+id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+        );
     }
 
-    create(data): Observable<any> {
-      return this.HttpClient.post(`${this.baseUrl}/cadastrar`, data);
+    create(data: Usuario): Observable<Usuario> {
+      return this.HttpClient.post<Usuario>(this.baseUrl+'/cadastrar',JSON.stringify(data), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+        );
     }
   
-    update(id, data): Observable<any> {
-      return this.HttpClient.put(`${this.baseUrl}/atualizar/${id}`, data);
+    update(data : Usuario): Observable<Usuario> {
+      return this.HttpClient.put<Usuario>(this.baseUrl+'/atualizar/'+data.id, JSON.stringify(data), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+        );
     }
   
-    delete(id): Observable<any> {
-      return this.HttpClient.delete(`${this.baseUrl}/deletar/${id}`);
+    delete(data: Usuario): Observable<Usuario> {
+      return this.HttpClient.delete<Usuario>(this.baseUrl+'/deletar/'+data.id, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+        );
     }
   
-    vacinationConfirm(id): Observable<any> {
-      return this.HttpClient.get(`${this.baseUrl}/confirmar/${id}`);
+    vacinationConfirm(id): Observable<Usuario> {
+      return this.HttpClient.get<Usuario>(this.baseUrl+'/confirmar/'+id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+        );
     }
 
-    queue(): Observable<any> {
-      return this.HttpClient.get(`${this.baseUrl}/fila`);
+    queue(): Observable<Usuario[]> {
+      return this.HttpClient.get<Usuario[]>(this.baseUrl+'/fila')
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+        );
     }
+
+    handleError(error: HttpErrorResponse) {
+      let errorMessage = '';
+      if (error.error instanceof ErrorEvent) {
+        // Erro ocorreu no lado do client
+        errorMessage = error.error.message;
+      } else {
+        // Erro ocorreu no lado do servidor
+        errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+      }
+      console.log(errorMessage);
+      return throwError(errorMessage);
+    };
 
 
 }

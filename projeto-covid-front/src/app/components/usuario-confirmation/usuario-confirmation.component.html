@@ -16,13 +16,22 @@
       
                <div>
                   <label><strong>CPF: </strong>{{currentUsuario.cpf}} </label> 
-               </div>
+              </div>
+      
+              <div>
+                  <label><strong>Tipo de Usuario: </strong>{{currentUsuario.tipoUsuario}} </label> 
+              </div>
+      
               <div>
                   <label><strong>Profissional da Saude: </strong>{{currentUsuario.profSaude}} </label> 
               </div>
       
               <div>
                   <label><strong>CEP: </strong>{{currentUsuario.endereco}} </label> 
+              </div>
+      
+              <div>
+                  <label><strong>Data de Vacinacao: </strong>{{currentUsuario.dataVacinacao}} </label> 
               </div>
       <button class="badge badge-danger mr-2" (click)="vacineUsuario()">
         Confirmar Vacinacao

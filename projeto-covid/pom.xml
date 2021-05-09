@@ -12,7 +12,7 @@
 	
 	<groupId>com.uc-usjt</groupId>
 	<artifactId>projeto-covid</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.2</version>
 	<name>projeto-covid</name>
 	<description>Um projeto para auxilio para as filas de vacinacao de covid</description>
 	

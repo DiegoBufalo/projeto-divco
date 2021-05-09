@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReportComponent } from './components/report/report.component';
 import { UsuarioConfirmationComponent } from './components/usuario-confirmation/usuario-confirmation.component';
 import { UsuarioCreateComponent } from './components/usuario-create/usuario-create.component';
 import { UsuarioDeleteComponent } from './components/usuario-delete/usuario-delete.component';
@@ -8,14 +9,14 @@ import { UsuarioListComponent } from './components/usuario-list/usuario-list.com
 import { UsuarioQueueComponent } from './components/usuario-queue/usuario-queue.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
+  { path: '', redirectTo: '/usuarios', pathMatch: 'full' },
   { path: 'usuarios', component: UsuarioListComponent },
   { path: 'usuarios/:id', component: UsuarioDetailsComponent },
   { path: 'cadastrar', component: UsuarioCreateComponent },
   { path: 'deletar/:id', component: UsuarioDeleteComponent},
   { path: 'fila', component: UsuarioQueueComponent },
-  { path: 'confirmar/:id', component: UsuarioConfirmationComponent }
-
+  { path: 'confirmar/:id', component: UsuarioConfirmationComponent },
+  { path: 'relatorio', component: ReportComponent }
 ];
 
 @NgModule({

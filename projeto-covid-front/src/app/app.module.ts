@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,7 @@ import { UsuarioListComponent } from './components/usuario-list/usuario-list.com
 import { UsuarioDeleteComponent } from './components/usuario-delete/usuario-delete.component';
 import { UsuarioQueueComponent } from './components/usuario-queue/usuario-queue.component';
 import { UsuarioConfirmationComponent } from './components/usuario-confirmation/usuario-confirmation.component';
+import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UsuarioConfirmationComponent } from './components/usuario-confirmation/
     UsuarioListComponent,
     UsuarioDeleteComponent,
     UsuarioQueueComponent,
-    UsuarioConfirmationComponent
+    UsuarioConfirmationComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

@@ -8,9 +8,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./usuario-confirmation.component.css']
 })
 export class UsuarioConfirmationComponent implements OnInit {
-
   currentUsuario = null;
-  message = '';
 
   constructor(
     private usuarioService: UsuarioService,
@@ -19,10 +17,10 @@ export class UsuarioConfirmationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.message = '';
     this.getUsuario(this.route.snapshot.paramMap.get('id'));
+    this.currentUsuario(this.route.snapshot.paramMap.getAll)
   }
-
+  
   getUsuario(id): void {
     this.usuarioService.read(id)
       .subscribe(
