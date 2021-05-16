@@ -1,8 +1,9 @@
 
 spring:
-  mail:    host: smtp.gmail.com
+  mail:
+    host: smtp.gmail.com
     username: projetodivco.uc@gmail.com
-    password: Projeto2021*
+    password: ${PASS_EMAIL}
     properties:
       mail:
         smtp:
@@ -14,17 +15,25 @@ spring:
           ssl:
             enable: true
           starttls:
-            enable: true        datasource:    url: jdbc:postgresql://localhost:5432/postgres?schema=public
+            enable: true
+      
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?schema=public
     username: postgres
     password: root
     initialization-mode: always
     continue-on-error: true
-    data:    - classpath:data.sql
+    data:
+    - classpath:data.sql
     platform: postgresql
-  application:    name: projeto-covid
+  application:
+    name: projeto-covid
   jpa:
     database: postgresql
-    hibernate:      ddl-auto: none
+    hibernate:
+      ddl-auto: none
             
-server:  port: 8080
-  error:    include-stacktrace: on-param
+server:
+  port: 8080
+  error:
+    include-stacktrace: on-param
