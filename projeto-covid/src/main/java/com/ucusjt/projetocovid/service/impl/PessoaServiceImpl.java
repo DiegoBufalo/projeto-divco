@@ -11,17 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ucusjt.projetocovid.dto.PessoaAtualizarDto;
 import com.ucusjt.projetocovid.dto.PessoaDto;
+import com.ucusjt.projetocovid.erros.EmailException;
 import com.ucusjt.projetocovid.model.Pessoa;
 import com.ucusjt.projetocovid.model.Relatorio;
 import com.ucusjt.projetocovid.repository.PessoaRepository;
 import com.ucusjt.projetocovid.repository.RelatorioRepository;
 import com.ucusjt.projetocovid.service.PessoaService;
+import com.ucusjt.projetocovid.service.EnvioEmailService;
+import com.ucusjt.projetocovid.service.EnvioEmailService.Mensagem;
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
 	
 	@Autowired
 	private PessoaRepository repository;
+	
+	@Autowired
+	private EnvioEmailService envioEmail;
 	
 	@Autowired
 	private RelatorioRepository relatorioRepository;
@@ -56,9 +62,15 @@ public class PessoaServiceImpl implements PessoaService {
 		}else if (repository.existsByEmail(pessoa.getEmail())) {
 			throw new DuplicateKeyException("Email já cadastrado na base de dados");
 		}else {
-			Pessoa pessoaSalva = repository.save(new PessoaDto().fromModel(pessoa));
-			pessoaSalva.setDataVacinacao(null);
-			return new PessoaDto().fromEntity(pessoaSalva);				
+			try {
+				Pessoa pessoaSalva = repository.save(new PessoaDto().fromModel(pessoa));
+				pessoaSalva.setDataVacinacao(null);
+				enviarEmail(pessoa);
+				
+				return new PessoaDto().fromEntity(pessoaSalva);				
+			}catch (Exception e) {
+				throw new EmailException("Algo ocorreu fora do previsto. Estamos trabalhando para arrumar o mais rapido possivel", e);
+			}
 		}
 	}
 
@@ -127,8 +139,19 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	public List<Relatorio> gerarRelatorio() {
-		//List<Relatorio> periodoRelatorio = relatorioRepository.findAllByDataBetween(LocalDate.now().minusDays(3),LocalDate.now());
 		return relatorioRepository.findAll();
+	}
+	
+	public void enviarEmail(PessoaDto pessoa) {
+		String msg = "Olá " + pessoa.getNome() +" "+ pessoa.getSobrenome() +", você foi cadastrado para a fila de vacinação com sucesso, "
+				+ "fique atento ao seu e-mail: "+ pessoa.getEmail() + ". Você reberá mensagens de possiveis alterações por ele.";
+		
+		var mesagem = Mensagem.builder().assunto("Cadastro Sistema DIVCO GERENCIAMENTO")
+										.corpo(msg)
+										.destinatario(pessoa.getEmail())
+										.build();
+		
+		envioEmail.enviar(mesagem);
 	}
 }
 

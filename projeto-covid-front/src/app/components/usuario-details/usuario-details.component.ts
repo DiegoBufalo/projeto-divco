@@ -26,6 +26,7 @@ export class UsuarioDetailsComponent implements OnInit {
       .subscribe(
         (usuario: Usuario) => {
           this.currentUsuario = usuario;
+          console.log(this.currentUsuario)
         });
   }
 

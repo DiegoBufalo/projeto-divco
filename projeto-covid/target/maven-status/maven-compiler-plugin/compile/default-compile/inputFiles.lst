@@ -1,13 +1,17 @@
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\beans\Erro.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\repository\PessoaRepository.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\ProjetoCovidApplication.java
+C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\service\impl\SmtpEnvioEmailService.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\service\PessoaService.java
+C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\config\EmailProperties.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\repository\RelatorioRepository.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\beans\ValidationError.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\dto\PessoaDto.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\dto\PessoaAtualizarDto.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\controller\PessoaController.java
+C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\service\EnvioEmailService.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\service\impl\PessoaServiceImpl.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\enums\TipoUsuario.java
+C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\erros\EmailException.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\model\Relatorio.java
 C:\Users\DiegoNote\Documents\dev\projeto-divco\projeto-covid\src\main\java\com\ucusjt\projetocovid\model\Pessoa.java

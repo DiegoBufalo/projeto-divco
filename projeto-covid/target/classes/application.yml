@@ -1,6 +1,20 @@
 
-
-spring:  datasource:    url: jdbc:postgresql://localhost:5432/postgres?schema=public
+spring:
+  mail:    host: smtp.gmail.com
+    username: projetodivco.uc@gmail.com
+    password: Projeto2021*
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+            port: 465
+          ssl:
+            enable: true
+          starttls:
+            enable: true        datasource:    url: jdbc:postgresql://localhost:5432/postgres?schema=public
     username: postgres
     password: root
     initialization-mode: always
@@ -11,6 +25,6 @@ spring:  datasource:    url: jdbc:postgresql://localhost:5432/postgres?schema=
   jpa:
     database: postgresql
     hibernate:      ddl-auto: none
-      
+            
 server:  port: 8080
   error:    include-stacktrace: on-param
