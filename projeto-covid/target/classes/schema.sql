@@ -21,6 +21,18 @@ CREATE TABLE IF NOT EXISTS pessoa (
 	CONSTRAINT uk_nlwiu48rutiltbnjle59krljo UNIQUE (cpf)
 );
 
+-- resposta_assistente definition
+
+-- Drop table
+
+-- DROP TABLE resposta_assistente;
+
+CREATE TABLE IF NOT EXISTS resposta_assistente (
+	id bigserial NOT NULL,
+	resposta varchar(255) NOT NULL,
+	CONSTRAINT resposta_assistente_pkey PRIMARY KEY (id)
+);
+
 -- relatorio source
 
 CREATE OR REPLACE VIEW relatorio

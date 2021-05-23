@@ -2,7 +2,7 @@
 spring:
   mail:    host: smtp.gmail.com
     username: projetodivco.uc@gmail.com
-    password: Projeto2021*
+    password: ${PASS_EMAIL}
     properties:
       mail:
         smtp:

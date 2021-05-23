@@ -37,4 +37,9 @@ INSERT INTO pessoa (cpf,data_nascimento,data_vacinacao,email,endereco,nome,prof_
 	 ('54363519800','2002-05-13 00:00:00',NULL,'beniciootaviorocha_@andrade.com','69903018','Benicio Otavio',false,'123','Rocha','ATENDENTE'),
 	 ('33794707249','1980-02-10 00:00:00',NULL,'franciscodiogomanuelpeixoto@solpro.biz','59127690','Francisco Diogo',false,'123','Peixoto','ATENDENTE');
 	 
+INSERT INTO resposta_assistente (resposta) VALUES
+	 ('Olá, sou o DIVCO bot e estou aqui para tirar as suas duvidas sobre a COVID-19'),
+	 ('Os sintomas são de febre, dor no corpo, falta de paladar e olfato. Em caso de sintomas, procure um sistema de saúde próximo'),
+	 ('Datas de vacinação: Consulte www.gov.org/vacinas');
+	 
 	 
