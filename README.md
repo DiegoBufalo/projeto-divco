@@ -6,7 +6,7 @@ ter instalado:
 
 -nodeJS
 -angular
--java jre
+-java jdk 11
 -maven
 
 passo 1:  subir imagem docker do postgres
