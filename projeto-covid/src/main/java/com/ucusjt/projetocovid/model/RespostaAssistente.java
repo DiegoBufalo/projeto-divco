@@ -30,6 +30,6 @@ public class RespostaAssistente{
     public RespostaAssistente (RespostaAssistenteDTO respostaAssistente){
         super();
         this.id = respostaAssistente.getId();
-        this.resposta = respostaAssistente.getResposta();
+        this.resposta = respostaAssistente.getMensagem();
     }
 }

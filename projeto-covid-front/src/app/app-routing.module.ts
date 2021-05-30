@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BootComponent } from './components/boot/boot.component';
 import { ReportComponent } from './components/report/report.component';
 import { UsuarioConfirmationComponent } from './components/usuario-confirmation/usuario-confirmation.component';
 import { UsuarioCreateComponent } from './components/usuario-create/usuario-create.component';
@@ -9,7 +10,8 @@ import { UsuarioListComponent } from './components/usuario-list/usuario-list.com
 import { UsuarioQueueComponent } from './components/usuario-queue/usuario-queue.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/usuarios', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: BootComponent },
   { path: 'usuarios', component: UsuarioListComponent },
   { path: 'usuarios/:id', component: UsuarioDetailsComponent },
   { path: 'cadastrar', component: UsuarioCreateComponent },

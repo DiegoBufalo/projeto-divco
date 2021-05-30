@@ -11,3 +11,7 @@ export interface Usuario {
   endereco?: string;
   dataVacinacao?: string;
 }
+
+export interface Pergunta{
+  pergunta: string;
+}

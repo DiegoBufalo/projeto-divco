@@ -16,7 +16,7 @@ public class RespostaAssistenteDTO implements Serializable {
 
     private Long id;
 
-    private String resposta;
+    private String mensagem;
     
 	public RespostaAssistenteDTO fromEntity(RespostaAssistente pessoa) {
 		RespostaAssistenteDTO model = new RespostaAssistenteDTO(pessoa.getId(),
@@ -26,7 +26,7 @@ public class RespostaAssistenteDTO implements Serializable {
 	
 	public RespostaAssistente fromModel(RespostaAssistenteDTO pessoa) {
 		RespostaAssistente entity = new RespostaAssistente(pessoa.getId(),
-				pessoa.getResposta());
+				pessoa.getMensagem());
 		return entity;
 	}
 }

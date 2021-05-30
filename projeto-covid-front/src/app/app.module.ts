@@ -12,6 +12,7 @@ import { UsuarioDeleteComponent } from './components/usuario-delete/usuario-dele
 import { UsuarioQueueComponent } from './components/usuario-queue/usuario-queue.component';
 import { UsuarioConfirmationComponent } from './components/usuario-confirmation/usuario-confirmation.component';
 import { ReportComponent } from './components/report/report.component';
+import { BootComponent } from './components/boot/boot.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReportComponent } from './components/report/report.component';
     UsuarioDeleteComponent,
     UsuarioQueueComponent,
     UsuarioConfirmationComponent,
-    ReportComponent
+    ReportComponent,
+    BootComponent
   ],
   imports: [
     BrowserModule,

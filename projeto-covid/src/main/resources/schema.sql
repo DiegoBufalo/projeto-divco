@@ -33,6 +33,24 @@ CREATE TABLE IF NOT EXISTS resposta_assistente (
 	CONSTRAINT resposta_assistente_pkey PRIMARY KEY (id)
 );
 
+-- public.pergunta definition
+
+-- Drop table
+
+-- DROP TABLE public.pergunta;
+
+CREATE TABLE public.pergunta (
+	id bigserial NOT NULL,
+	palavra_chave varchar(255) NULL,
+	id_resposta int8 NULL,
+	CONSTRAINT pergunta_pkey PRIMARY KEY (id)
+);
+
+
+-- public.pergunta foreign keys
+
+ALTER TABLE public.pergunta ADD CONSTRAINT fk9i03d0ikg76bwx7rc01hs752r FOREIGN KEY (id_resposta) REFERENCES resposta_assistente(id);
+
 -- relatorio source
 
 CREATE OR REPLACE VIEW relatorio

@@ -11,5 +11,7 @@ public interface RespostaAssistenteService {
 	
 	public RespostaAssistenteDTO buscarResposta(String palavra);
 	
+	public RespostaAssistenteDTO buscarRespostaAtt(String palavra);
+	
 	
 }

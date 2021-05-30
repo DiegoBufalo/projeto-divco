@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ucusjt.projetocovid.dto.RespostaAssistenteDTO;
 import com.ucusjt.projetocovid.repository.RespostaAssistenteRepository;
+import com.ucusjt.projetocovid.service.PerguntaService;
 import com.ucusjt.projetocovid.service.RespostaAssistenteService;
 
 @Service
@@ -12,6 +13,9 @@ public class RespostaAssistenteServiceImpl implements RespostaAssistenteService{
 	
 	@Autowired
 	private RespostaAssistenteRepository repository;
+	
+	@Autowired
+	private PerguntaService servicePergunta;
 
 	private static final String MESSAGE_RESPOSTA_NOTFOUND="Desculpe, não entendi a sua pergunta";
 	
@@ -24,11 +28,31 @@ public class RespostaAssistenteServiceImpl implements RespostaAssistenteService{
 	public RespostaAssistenteDTO buscarResposta(String palavra) {
 		
 		try {
+			
 			return new RespostaAssistenteDTO()
 					.fromEntity(
 							repository
 								.findFirstByRespostaContainingIgnoringCase(palavra));
 		}catch (Exception e) {
+			throw new Error(MESSAGE_RESPOSTA_NOTFOUND, e.getCause());
+		}
+	}
+
+	@Override
+	public RespostaAssistenteDTO buscarRespostaAtt(String palavra) {
+		
+		try {
+			Long idResposta = servicePergunta.buscarIdResposta(palavra);
+			
+			if (idResposta != null) {
+				return new RespostaAssistenteDTO()
+						.fromEntity(
+								repository.findById(idResposta).get());
+			}else {
+				return new RespostaAssistenteDTO(0L, MESSAGE_RESPOSTA_NOTFOUND);
+			}
+			
+		} catch (Exception e) {
 			throw new Error(MESSAGE_RESPOSTA_NOTFOUND, e.getCause());
 		}
 	}
