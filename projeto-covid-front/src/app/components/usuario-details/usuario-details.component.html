@@ -1,15 +1,14 @@
 <div style="width: 500px; margin: auto;">
     <div *ngIf="currentUsuario" class="edit-form">
       <h4>Usuario</h4>
-      <form >
+
+      <form [formGroup]="currentUsuario" >
         <div class="form-group">
             <label for="nome">Nome</label>
             <input
-              type="text"
-              class="form-control"
-              id="nome"
-              [(ngModel)]="currentUsuario.nome"
-              name="nome"
+              type="text" class="form-control"
+              id="nome" name="nome"
+              formControlName="nome"
             />
           </div>
   
@@ -19,7 +18,7 @@
                 type="text"
                 class="form-control"
                 id="sobrenome"
-                [(ngModel)]="currentUsuario.sobrenome"
+                formControlName="sobrenome"
                 name="sobrenome"
               />
             </div>
@@ -30,7 +29,7 @@
                 type="text"
                 class="form-control"
                 id="email"
-                [(ngModel)]="currentUsuario.email"
+                formControlName="email"
                 name="email"
               />
             </div>
@@ -41,7 +40,7 @@
                 type="text"
                 class="form-control"
                 id="tipoUsuario"
-                [(ngModel)]="currentUsuario.tipoUsuario"
+                formControlName="tipoUsuario"
                 name="tipoUsuario">
                 <option value="ATENDENTE">Usuario</option>
                 <option value="ADMINISTRADOR">Administrador</option>
@@ -55,7 +54,7 @@
               pattern="[0-9]{8}"
               id="endereco"
               placeholder="insira seu CEP (somente numeros)"
-              [(ngModel)]="currentUsuario.endereco"
+              formControlName="endereco"
               name="endereco"
             />
           </div>
@@ -66,14 +65,14 @@
                 type="text"
                 class="form-control"
                 id="profSaude"
-                [(ngModel)]="currentUsuario.profSaude"
+                formControlName="profSaude"
                 name="profSaude">
                 <option value="false">Nao</option>
                 <option value="true">Sim</option>
               </select>
             </div>
-
       </form>
+
       <button 
         class="badge badge-danger mr-2" 
         (click)="deleteUsuario()">
