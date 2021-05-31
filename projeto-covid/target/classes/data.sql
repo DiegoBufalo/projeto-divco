@@ -65,7 +65,7 @@ INSERT INTO public.pergunta(id, palavra_chave, id_resposta) VALUES
 	 (11,'vacinas', 4),
 	 (12,'aprovada', 4),
 	 (13,'aprovadas', 4),
-	 (14,'vacina', 4),
+	 (14,'vacinaa', 4),
 	 (15,'anvisa', 4),
 	 (16,'recomendada', 5),
 	 (17,'recomendacao', 5),

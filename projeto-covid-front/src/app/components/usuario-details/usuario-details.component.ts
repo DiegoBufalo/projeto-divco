@@ -14,9 +14,10 @@ export class UsuarioDetailsComponent implements OnInit {
 
   usuarioEncontrado: Usuario ={
     id: null,
-    nome: 'Diego',
+    nome: '',
     sobrenome: '',
     email: '',
+    senha:'',
     tipoUsuario: '',
     profSaude: false,
     endereco: ''
@@ -54,13 +55,11 @@ export class UsuarioDetailsComponent implements OnInit {
           this.usuarioEncontrado.nome = data[0].nome
           this.usuarioEncontrado.sobrenome = data[0].sobrenome
           this.usuarioEncontrado.email = data[0].email
+          this.usuarioEncontrado.senha = data[0].senha
           this.usuarioEncontrado.tipoUsuario = data[0].tipoUsuario
           this.usuarioEncontrado.profSaude = data[0].profSaude
           this.usuarioEncontrado.endereco = data[0].endereco
-
-          console.log(this.usuarioEncontrado)
         });
-        console.log(this.usuarioEncontrado + 'testando')
 
         this.currentUsuario.setValue(this.usuarioEncontrado);
          console.log(this.currentUsuario.get("nome"));

@@ -1,14 +1,14 @@
 <div style="width: 500px; margin: auto;">
-    <div *ngIf="currentUsuario" class="edit-form">
+    <div *ngIf="usuarioEncontrado.id" class="edit-form">
       <h4>Usuario</h4>
 
-      <form [formGroup]="currentUsuario" >
+      <form >
         <div class="form-group">
             <label for="nome">Nome</label>
             <input
               type="text" class="form-control"
               id="nome" name="nome"
-              formControlName="nome"
+              [(ngModel)]="usuarioEncontrado.nome"
             />
           </div>
   
@@ -18,7 +18,7 @@
                 type="text"
                 class="form-control"
                 id="sobrenome"
-                formControlName="sobrenome"
+                [(ngModel)]="usuarioEncontrado.sobrenome"
                 name="sobrenome"
               />
             </div>
@@ -29,7 +29,7 @@
                 type="text"
                 class="form-control"
                 id="email"
-                formControlName="email"
+                [(ngModel)]="usuarioEncontrado.email"
                 name="email"
               />
             </div>
@@ -40,7 +40,7 @@
                 type="text"
                 class="form-control"
                 id="tipoUsuario"
-                formControlName="tipoUsuario"
+                [(ngModel)]="usuarioEncontrado.tipoUsuario"
                 name="tipoUsuario">
                 <option value="ATENDENTE">Usuario</option>
                 <option value="ADMINISTRADOR">Administrador</option>
@@ -54,7 +54,7 @@
               pattern="[0-9]{8}"
               id="endereco"
               placeholder="insira seu CEP (somente numeros)"
-              formControlName="endereco"
+              [(ngModel)]="usuarioEncontrado.endereco"
               name="endereco"
             />
           </div>
@@ -65,7 +65,7 @@
                 type="text"
                 class="form-control"
                 id="profSaude"
-                formControlName="profSaude"
+                [(ngModel)]="usuarioEncontrado.profSaude"
                 name="profSaude">
                 <option value="false">Nao</option>
                 <option value="true">Sim</option>
@@ -89,7 +89,7 @@
       <p></p>
     </div>
   
-    <div *ngIf="!currentUsuario">
+    <div *ngIf="!usuarioEncontrado.id">
       <br />
       <p>Usuario Nao Existe</p>
     </div>
