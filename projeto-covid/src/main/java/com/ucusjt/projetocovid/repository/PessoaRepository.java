@@ -17,9 +17,11 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 
 	List<Pessoa> findByDataNascimento(LocalDate dataNascimento);
 	
-	List<Pessoa> findByDataNascimentoLessThan(LocalDate dataNascimento);
+	
+	List<Pessoa> findByDataNascimentoLessThanOrderById(LocalDate dataNascimento);
 
-	List<Pessoa> findByProfSaude(Boolean profSaude);
+	List<Pessoa> findByProfSaudeOrderById(Boolean profSaude);
+	
 	
 	boolean existsByCpf(String cpf);
 	

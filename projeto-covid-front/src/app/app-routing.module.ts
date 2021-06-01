@@ -10,7 +10,7 @@ import { UsuarioListComponent } from './components/usuario-list/usuario-list.com
 import { UsuarioQueueComponent } from './components/usuario-queue/usuario-queue.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/usuarios', pathMatch: 'full' },
   { path: 'home', component: BootComponent },
   { path: 'usuarios', component: UsuarioListComponent },
   { path: 'usuarios/:id', component: UsuarioDetailsComponent },

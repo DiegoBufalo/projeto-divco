@@ -1,13 +1,12 @@
 <div class="container">
-
   <div class="row align-items-center">
     <div class="mx-auto">
-      <h3><i class="fas fa-robot"></i>ChatBot</h3>
+      <h3><i class="fas fa-robot"></i>Cleitin, o assistente</h3>
     </div>
   </div>
 
   <div class="row align-items-center justify-content-center">
-    <div class="col-lg-8">
+    <div class="col-lg-8 card">
       <ul #scrollMe class="messages">
         <div *ngFor="let msg of resultados ">
           <li class="message appeared" [ngClass]="{'left':msg.remetente === 'boot',

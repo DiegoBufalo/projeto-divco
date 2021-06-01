@@ -27,8 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ucusjt.projetocovid.beans.Erro;
 import com.ucusjt.projetocovid.dto.PessoaAtualizarDto;
 import com.ucusjt.projetocovid.dto.PessoaDto;
-import com.ucusjt.projetocovid.model.Pessoa;
-import com.ucusjt.projetocovid.model.Relatorio;
 import com.ucusjt.projetocovid.service.PessoaService;
 
 @RestController
@@ -53,14 +51,14 @@ public class PessoaController {
 	
 	@GetMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public List<Pessoa> buscarPessoa(@PathVariable Long id) {
+	public PessoaDto buscarPessoa(@PathVariable Long id) {
 		return service.buscarPessoa(id);
 	}
 	
-	@GetMapping("/relat")
+	@GetMapping("/cpf/{cpf}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public List<Relatorio> relatorioTeste() {
-		return service.gerarRelatorio();
+	public PessoaDto buscarPessoa(@PathVariable String cpf) {
+		return service.buscarPessoaPorCpf(cpf);
 	}
 	
 	@PostMapping("/cadastrar")
@@ -81,11 +79,6 @@ public class PessoaController {
 		service.deletarPessoa(id);
 	}
 
-	@DeleteMapping("/cleardatabase")
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void clearDatabase() {
-		service.clearDatabase();
-	}
 	
 	@GetMapping("/confirmar/{id}")
 	@ResponseStatus(value = HttpStatus.OK)

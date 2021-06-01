@@ -35,6 +35,14 @@ export class UsuarioService{
         );
     }
 
+    readCpf(cpf): Observable<Usuario> {
+      return this.HttpClient.get<Usuario>(this.baseUrl +'/cpf'+cpf)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+        );
+    }
+
     create(data: Usuario): Observable<Usuario> {
       return this.HttpClient.post<Usuario>(this.baseUrl+'/cadastrar',JSON.stringify(data), this.httpOptions)
       .pipe(

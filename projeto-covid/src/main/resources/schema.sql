@@ -50,12 +50,3 @@ CREATE TABLE public.pergunta (
 -- public.pergunta foreign keys
 
 ALTER TABLE public.pergunta ADD CONSTRAINT fk9i03d0ikg76bwx7rc01hs752r FOREIGN KEY (id_resposta) REFERENCES resposta_assistente(id);
-
--- relatorio source
-
-CREATE OR REPLACE VIEW relatorio
-AS SELECT pessoa.data_vacinacao AS data,
-    count(pessoa.data_vacinacao) AS media_diaria
-   FROM pessoa
-  WHERE pessoa.data_nascimento < to_timestamp('2020-01-01'::text, 'yyyy,mm,dd'::text) AND pessoa.data_nascimento > to_timestamp('1930-01-01'::text, 'yyyy,mm,dd'::text)
-  GROUP BY pessoa.data_vacinacao;

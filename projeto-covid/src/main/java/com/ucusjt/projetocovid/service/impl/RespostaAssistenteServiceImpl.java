@@ -23,20 +23,7 @@ public class RespostaAssistenteServiceImpl implements RespostaAssistenteService{
 	public RespostaAssistenteDTO apresentacaoInicial() {
 		return new RespostaAssistenteDTO().fromEntity(repository.findById(1L).get());
 	}
-
-	@Override
-	public RespostaAssistenteDTO buscarResposta(String palavra) {
-		
-		try {
-			
-			return new RespostaAssistenteDTO()
-					.fromEntity(
-							repository
-								.findFirstByRespostaContainingIgnoringCase(palavra));
-		}catch (Exception e) {
-			throw new Error(MESSAGE_RESPOSTA_NOTFOUND, e.getCause());
-		}
-	}
+	
 
 	@Override
 	public RespostaAssistenteDTO buscarRespostaAtt(String palavra) {

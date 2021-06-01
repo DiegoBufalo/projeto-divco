@@ -12,11 +12,11 @@ export class UsuarioListComponent implements OnInit {
   usuario = {} as Usuario;
   usuarios: Usuario[];
 
-  @Input() currentUsuario = null;
+  currentUsuario = null;
   
   
   currentIndex = -1;
-  cpf = 0;
+  cpf = null;
 
   constructor(private UsuarioService: UsuarioService) { }
 
@@ -45,7 +45,7 @@ export class UsuarioListComponent implements OnInit {
   }
 
   searchByCpf(): void {
-    this.UsuarioService.read(this.cpf)
+    this.UsuarioService.readCpf(this.cpf)
       .subscribe(
         usuarioCpf => {
           this.usuario = usuarioCpf;

@@ -7,7 +7,6 @@ com\ucusjt\projetocovid\controller\PessoaController.class
 com\ucusjt\projetocovid\repository\PessoaRepository.class
 com\ucusjt\projetocovid\service\PerguntaService.class
 com\ucusjt\projetocovid\repository\RespostaAssistenteRepository.class
-com\ucusjt\projetocovid\model\Relatorio.class
 com\ucusjt\projetocovid\service\impl\PessoaServiceImpl.class
 com\ucusjt\projetocovid\service\EnvioEmailService$Mensagem.class
 com\ucusjt\projetocovid\model\Pessoa$PessoaBuilder.class
@@ -24,7 +23,6 @@ com\ucusjt\projetocovid\model\Pergunta.class
 com\ucusjt\projetocovid\beans\ValidationError.class
 com\ucusjt\projetocovid\service\EnvioEmailService.class
 com\ucusjt\projetocovid\config\EmailProperties.class
-com\ucusjt\projetocovid\repository\RelatorioRepository.class
 com\ucusjt\projetocovid\model\Pergunta$PerguntaBuilder.class
 com\ucusjt\projetocovid\model\RespostaAssistente.class
 com\ucusjt\projetocovid\dto\RespostaAssistenteDTO.class

@@ -4,25 +4,24 @@
         <input
           type="text"
           class="form-control"
-          placeholder="EM MANUTENÇÃO"
-          (ngModel)="cpf"
+          placeholder="EM MANUTENCAO" 
+          pattern="[0-9]{11}"
+          [(ngModel)]="cpf"
         />
         <div class="input-group-append">
           <button
             class="btn btn-dark"
             type="button"
+              (click)="searchByCpf()"
           >
             Buscar
           </button>
-            <!-- 
-           (click)="searchByCpf()"
-            -->
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div  class="col-md-6">
       <h4>Lista de Usuarios</h4>
-      <ul class="list-group">
+      <ul class="list-group scroll">
         <li
           class="list-group-item"
           *ngFor="let usuario of usuarios; let i = index"

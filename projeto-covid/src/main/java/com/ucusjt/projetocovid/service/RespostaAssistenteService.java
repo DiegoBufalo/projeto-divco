@@ -9,8 +9,6 @@ public interface RespostaAssistenteService {
 
 	public RespostaAssistenteDTO apresentacaoInicial();
 	
-	public RespostaAssistenteDTO buscarResposta(String palavra);
-	
 	public RespostaAssistenteDTO buscarRespostaAtt(String palavra);
 	
 	

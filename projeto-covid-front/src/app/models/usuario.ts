@@ -15,3 +15,14 @@ export interface Usuario {
 export interface Pergunta{
   pergunta: string;
 }
+
+export interface UsuarioAtualizar{
+  id?: number;
+  nome?: string;
+  sobrenome?: string;
+  email?: string;
+  senha?: string;
+  tipoUsuario?: string;
+  profSaude?: boolean;
+  endereco?: string;
+}

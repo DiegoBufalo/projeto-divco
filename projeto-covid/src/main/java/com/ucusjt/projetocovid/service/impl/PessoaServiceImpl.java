@@ -13,12 +13,10 @@ import com.ucusjt.projetocovid.dto.PessoaAtualizarDto;
 import com.ucusjt.projetocovid.dto.PessoaDto;
 import com.ucusjt.projetocovid.erros.EmailException;
 import com.ucusjt.projetocovid.model.Pessoa;
-import com.ucusjt.projetocovid.model.Relatorio;
 import com.ucusjt.projetocovid.repository.PessoaRepository;
-import com.ucusjt.projetocovid.repository.RelatorioRepository;
-import com.ucusjt.projetocovid.service.PessoaService;
 import com.ucusjt.projetocovid.service.EnvioEmailService;
 import com.ucusjt.projetocovid.service.EnvioEmailService.Mensagem;
+import com.ucusjt.projetocovid.service.PessoaService;
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
@@ -28,9 +26,6 @@ public class PessoaServiceImpl implements PessoaService {
 	
 	@Autowired
 	private EnvioEmailService envioEmail;
-	
-	@Autowired
-	private RelatorioRepository relatorioRepository;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -45,11 +40,20 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Pessoa> buscarPessoa(Long id) {
-		List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
-		Pessoa pessoa = repository.findById(id).get();
-		listaPessoa.add(pessoa);
-		return listaPessoa;
+	public PessoaDto buscarPessoaPorCpf(String cpf) {
+		return new PessoaDto()
+						.fromEntity(
+								repository.findByCpf(cpf)
+								);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public PessoaDto buscarPessoa(Long id) {
+		return new PessoaDto()
+				.fromEntity(
+						repository.findById(id).get()
+							);
 	}
 	
 	
@@ -97,33 +101,36 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	@Transactional
-	public void clearDatabase() {
-		repository.deleteAll();
-	}
-
-	@Override
-	@Transactional
 	public PessoaDto confirmarVacinacao(Long id) {
-		Pessoa pessoaEncontrada = repository.getOne(id);
-		pessoaEncontrada.setDataVacinacao(LocalDate.now());
-		repository.save(pessoaEncontrada);
-		return new PessoaDto().fromEntity(pessoaEncontrada);
+		
+		try {
+				Pessoa pessoaEncontrada = repository.findById(id).get();
+				pessoaEncontrada.setDataVacinacao(LocalDate.now());
+				repository.save(pessoaEncontrada);
+				
+				enviarConfirmVacinacao(pessoaEncontrada);
+				
+				return new PessoaDto().fromEntity(pessoaEncontrada);	
+				
+			}catch (Exception e) {
+				throw new Error("Ocorreu um erro, mas ja estamos trabalhando para arrumar isso", e);
+			}
 	}
 
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<PessoaDto> filaVacinacao() {
-		List<PessoaDto> listaPessoas = new ArrayList<PessoaDto>();
-		List<Long> listaId = new ArrayList<Long>();
+			List<PessoaDto> listaPessoas = new ArrayList<PessoaDto>();
+			List<Long> listaId = new ArrayList<Long>();
 		
-		for (Pessoa pessoas : repository.findByDataNascimentoLessThan(LocalDate.now().minusYears(70))) {
+		for (Pessoa pessoas : repository.findByDataNascimentoLessThanOrderById(LocalDate.now().minusYears(70))) {
 			if (pessoas.getDataVacinacao() == null) {
 				listaPessoas.add(new PessoaDto().fromEntity(pessoas));
 				listaId.add(pessoas.getId());				
 			}
 		}
-		for(Pessoa pessoas : repository.findByProfSaude(true)) {
+		for(Pessoa pessoas : repository.findByProfSaudeOrderById(true)) {
 			if (!listaId.contains(pessoas.getId()) && pessoas.getDataVacinacao() == null) {
 				listaPessoas.add(new PessoaDto().fromEntity(pessoas));
 				listaId.add(pessoas.getId());
@@ -137,10 +144,9 @@ public class PessoaServiceImpl implements PessoaService {
 		return listaPessoas;
 	}
 
-	@Override
-	public List<Relatorio> gerarRelatorio() {
-		return relatorioRepository.findAll();
-	}
+	
+	
+	
 	
 	public void enviarEmail(PessoaDto pessoa) {
 		String msg = "Olá " + pessoa.getNome() +" "+ pessoa.getSobrenome() +", você foi cadastrado para a fila de vacinação com sucesso, "
@@ -153,5 +159,19 @@ public class PessoaServiceImpl implements PessoaService {
 		
 		envioEmail.enviar(mesagem);
 	}
+	
+	public void enviarConfirmVacinacao(Pessoa pessoa) {
+		String msg = "Parabéns " + pessoa.getNome() +" "+ pessoa.getSobrenome() +", você acaba de ser vacinado com sucesso.\n "
+				+ "Mas lembre-se a luta contra o COVID-19 ainda não acabou, continue se cuidando.";
+		
+		var mesagem = Mensagem.builder().assunto("CONFIRMACAO DE VACINACAO")
+										.corpo(msg)
+										.destinatario(pessoa.getEmail())
+										.build();
+		envioEmail.enviar(mesagem);
+	}
+
+	
+	
 }
 
