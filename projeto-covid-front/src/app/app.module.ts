@@ -13,6 +13,7 @@ import { UsuarioQueueComponent } from './components/usuario-queue/usuario-queue.
 import { UsuarioConfirmationComponent } from './components/usuario-confirmation/usuario-confirmation.component';
 import { ReportComponent } from './components/report/report.component';
 import { BootComponent } from './components/boot/boot.component';
+import { CovidComponent } from './components/covid/covid.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BootComponent } from './components/boot/boot.component';
     UsuarioQueueComponent,
     UsuarioConfirmationComponent,
     ReportComponent,
-    BootComponent
+    BootComponent,
+    CovidComponent
   ],
   imports: [
     BrowserModule,

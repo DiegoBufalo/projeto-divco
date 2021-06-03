@@ -1,0 +1,58 @@
+<blockquote class="blockquote text-center">
+    <p class="mb-0 display-4">COVID-19 {{brasil.country}}</p>
+    <footer class="blockquote-footer">População: <cite title="Título da fonte">{{brasil.population | number}}</cite></footer>
+    <footer class="blockquote-footer">Atuliazado: <cite title="Título da fonte">({{ saoPaulo.updated | date:'medium'}})</cite></footer>
+  </blockquote>
+
+<div class="row shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="col-sm-6">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body ">
+          <h5 class="card-title">Casos Confirmados</h5>
+          <p class="card-text display-4">{{brasil.confirmed | number}}</p>
+          <p class="card-text">{{brasil.percentpopuCase | number : "1.2-2"}} %</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h5 class="card-title">Casos Recuperados</h5>
+          <p class="card-text display-4">{{brasil.recovered | number}}</p>
+          <p class="card-text ">{{brasil.percentRecovered | number : "1.2-2"}} %</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+  <div class="row shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="col-sm-4">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h5 class="card-title">Mortes</h5>
+          <p class="card-text display-4">{{brasil.deaths | number}}</p>
+          <p class="card-text">{{brasil.percentdeaths | number : "1.2-2"}} %</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4 ">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+          <div class="card-body">
+            <h5 class="card-title">Casos Ativos</h5>
+            <p class="card-text display-4">{{brasil.actives | number}}</p>
+            <p class="card-text">{{brasil.percentActive | number : "1.2-2"}} %</p>
+          </div>
+        </div>
+      </div>
+
+    <div class="col-sm-4 ">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+            <h5 class="card-title">São Paulo - Casos</h5>
+                <p class="card-text display-4">{{saoPaulo.confirmed | number}}</p>
+                <p class="card-text"><cite title="Título da fonte">Mortes:  </cite>{{saoPaulo.deaths | number}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
