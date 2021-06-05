@@ -7,7 +7,5 @@ import com.ucusjt.projetocovid.model.RespostaAssistente;
 
 @Repository
 public interface RespostaAssistenteRepository extends JpaRepository<RespostaAssistente, Long> {
-
-    RespostaAssistente findFirstByRespostaContainingIgnoringCase(String palavra);
-
+	
 }

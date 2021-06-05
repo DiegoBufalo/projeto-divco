@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
-import com.ucusjt.projetocovid.dto.PessoaDto;
 import com.ucusjt.projetocovid.enums.TipoUsuario;
 
 import lombok.AllArgsConstructor;
@@ -67,21 +66,4 @@ public class Pessoa {
 	@Column(name = "data_vacinacao", nullable = true)
 	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
 	private LocalDate dataVacinacao;
-	
-	
-	public Pessoa fromModel(PessoaDto pessoa) {
-		Pessoa entity = new Pessoa(pessoa.getId(),
-				pessoa.getNome(),
-				pessoa.getSobrenome(),
-				pessoa.getEmail(),
-				pessoa.getSenha(),
-				pessoa.getCpf(),
-				pessoa.getDataNascimento(),
-				pessoa.getTipoUsuario(),
-				pessoa.getProfSaude(),
-				pessoa.getEndereco(),
-				pessoa.getDataNascimento());
-		return entity;
-	}
-	
 }

@@ -14,19 +14,14 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 	Pessoa findByEmail(String email);
 	
 	Pessoa findByCpf(String cpf);
-
-	List<Pessoa> findByDataNascimento(LocalDate dataNascimento);
-	
-	
-	List<Pessoa> findByDataNascimentoLessThanOrderById(LocalDate dataNascimento);
-
-	List<Pessoa> findByProfSaudeOrderById(Boolean profSaude);
-	
 	
 	boolean existsByCpf(String cpf);
 	
 	boolean existsByEmail(String email);
-
-	List<Pessoa> findByDataVacinacaoBetween(LocalDate dataInicial, LocalDate dataFinal);
 	
+	List<Pessoa> findAllByOrderById();
+	
+	List<Pessoa> findByDataNascimentoLessThanOrderById(LocalDate dataNascimento);
+
+	List<Pessoa> findByProfSaudeOrderById(Boolean profSaude);	
 }

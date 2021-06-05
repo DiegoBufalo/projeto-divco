@@ -1,7 +1,5 @@
 package com.ucusjt.projetocovid.service.impl;
 
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -9,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ucusjt.projetocovid.config.EmailProperties;
 import com.ucusjt.projetocovid.erros.EmailException;
+import com.ucusjt.projetocovid.model.Mensagem;
 import com.ucusjt.projetocovid.service.EnvioEmailService;
 
 @Service
@@ -25,9 +24,9 @@ public class SmtpEnvioEmailService  implements EnvioEmailService{
 		try {
 			String corpo = mensagem.getCorpo();
 			
-			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			var mimeMessage = mailSender.createMimeMessage();
 			
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
+			var helper = new MimeMessageHelper(mimeMessage, "UTF-8");
 			helper.setFrom(emailProperties.getRemetente());
 			helper.setTo(mensagem.getDestinatarios().toArray(new String[0]));
 			helper.setSubject(mensagem.getAssunto());

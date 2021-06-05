@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ucusjt.projetocovid.dto.PessoaAtualizarDto;
 import com.ucusjt.projetocovid.dto.PessoaDto;
 import com.ucusjt.projetocovid.erros.EmailException;
+import com.ucusjt.projetocovid.model.Mensagem;
 import com.ucusjt.projetocovid.model.Pessoa;
 import com.ucusjt.projetocovid.repository.PessoaRepository;
 import com.ucusjt.projetocovid.service.EnvioEmailService;
-import com.ucusjt.projetocovid.service.EnvioEmailService.Mensagem;
 import com.ucusjt.projetocovid.service.PessoaService;
 
 @Service
@@ -31,8 +31,8 @@ public class PessoaServiceImpl implements PessoaService {
 	@Transactional(readOnly = true)
 	public List<PessoaDto> buscarPessoas() {
 		
-		List<PessoaDto> listaPessoas = new ArrayList<PessoaDto>();
-		for (Pessoa pessoas : repository.findAll()) {
+		List<PessoaDto> listaPessoas = new ArrayList<>();
+		for (Pessoa pessoas : repository.findAllByOrderById()) {
 			listaPessoas.add(new PessoaDto().fromEntity(pessoas));
 		}
 		return listaPessoas;
@@ -67,7 +67,7 @@ public class PessoaServiceImpl implements PessoaService {
 			throw new DuplicateKeyException("Email já cadastrado na base de dados");
 		}else {
 			try {
-				Pessoa pessoaSalva = repository.save(new PessoaDto().fromModel(pessoa));
+				var pessoaSalva = repository.save(new PessoaDto().fromModel(pessoa));
 				pessoaSalva.setDataVacinacao(null);
 				enviarEmail(pessoa);
 				
@@ -81,7 +81,7 @@ public class PessoaServiceImpl implements PessoaService {
 	@Override
 	@Transactional
 	public PessoaDto atualizarPessoa(Long id, PessoaAtualizarDto pessoa) {
-		Pessoa pessoaEncontrada = repository.getOne(id);
+		var pessoaEncontrada = repository.getOne(id);
 		pessoaEncontrada.setNome(pessoa.getNome());
 		pessoaEncontrada.setSobrenome(pessoa.getSobrenome());
 		pessoaEncontrada.setEmail(pessoa.getEmail());
@@ -101,10 +101,10 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	@Transactional
-	public PessoaDto confirmarVacinacao(Long id) {
+	public PessoaDto confirmarVacinacao(Long id) throws Exception {
 		
 		try {
-				Pessoa pessoaEncontrada = repository.findById(id).get();
+				var pessoaEncontrada = repository.findById(id).get();
 				pessoaEncontrada.setDataVacinacao(LocalDate.now());
 				repository.save(pessoaEncontrada);
 				
@@ -113,7 +113,7 @@ public class PessoaServiceImpl implements PessoaService {
 				return new PessoaDto().fromEntity(pessoaEncontrada);	
 				
 			}catch (Exception e) {
-				throw new Error("Ocorreu um erro, mas ja estamos trabalhando para arrumar isso", e);
+				throw new Exception("Ocorreu um erro, mas ja estamos trabalhando para arrumar isso", e);
 			}
 	}
 
@@ -121,8 +121,8 @@ public class PessoaServiceImpl implements PessoaService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<PessoaDto> filaVacinacao() {
-			List<PessoaDto> listaPessoas = new ArrayList<PessoaDto>();
-			List<Long> listaId = new ArrayList<Long>();
+			List<PessoaDto> listaPessoas = new ArrayList<>();
+			List<Long> listaId = new ArrayList<>();
 		
 		for (Pessoa pessoas : repository.findByDataNascimentoLessThanOrderById(LocalDate.now().minusYears(70))) {
 			if (pessoas.getDataVacinacao() == null) {
@@ -136,7 +136,7 @@ public class PessoaServiceImpl implements PessoaService {
 				listaId.add(pessoas.getId());
 			}
 		}
-		for(Pessoa pessoas : repository.findAll()) {
+		for(Pessoa pessoas : repository.findAllByOrderById()) {
 			if (!listaId.contains(pessoas.getId()) && pessoas.getDataVacinacao() == null) {
 				listaPessoas.add(new PessoaDto().fromEntity(pessoas));
 			}

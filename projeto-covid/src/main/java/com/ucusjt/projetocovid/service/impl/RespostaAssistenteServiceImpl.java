@@ -40,7 +40,7 @@ public class RespostaAssistenteServiceImpl implements RespostaAssistenteService{
 			}
 			
 		} catch (Exception e) {
-			throw new Error(MESSAGE_RESPOSTA_NOTFOUND, e.getCause());
+			throw new Error(MESSAGE_RESPOSTA_NOTFOUND, e);
 		}
 	}
 }

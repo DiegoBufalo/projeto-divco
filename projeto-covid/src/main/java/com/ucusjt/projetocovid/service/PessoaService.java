@@ -22,7 +22,7 @@ public interface PessoaService {
 	
 	public void deletarPessoa(Long id);
 	
-	public PessoaDto confirmarVacinacao(Long id);
+	public PessoaDto confirmarVacinacao(Long id) throws Exception;
 	
 	public List<PessoaDto> filaVacinacao();
 }
