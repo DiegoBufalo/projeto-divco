@@ -14,6 +14,8 @@ import { UsuarioConfirmationComponent } from './components/usuario-confirmation/
 import { ReportComponent } from './components/report/report.component';
 import { BootComponent } from './components/boot/boot.component';
 import { CovidComponent } from './components/covid/covid.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { CovidComponent } from './components/covid/covid.component';
     UsuarioConfirmationComponent,
     ReportComponent,
     BootComponent,
-    CovidComponent
+    CovidComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

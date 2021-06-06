@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { generate } from 'rxjs';
 import {  UsuarioService } from 'src/app/services/usuario.service'
 
 @Component({
@@ -12,7 +13,7 @@ export class UsuarioCreateComponent implements OnInit {
     nome: '',
     sobrenome: '',
     email: '',
-    senha: '',
+    senha: 'senhaPadrao',
     cpf: '',
     dataNascimento: '',
     tipoUsuario: 'ATENDENTE',

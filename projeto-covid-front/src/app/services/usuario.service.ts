@@ -3,6 +3,8 @@ import { Usuario } from './../models/usuario';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { retry, catchError } from 'rxjs/operators';
+import { TokenStorageService } from './token-storage.service';
+
 
 @Injectable({
   providedIn: 'root',
@@ -12,15 +14,17 @@ export class UsuarioService{
 
   private baseUrl = 'http://localhost:8080/pessoa';
 
-  constructor(private HttpClient: HttpClient){ }
+  constructor(private HttpClient: HttpClient,
+    private token: TokenStorageService){ }
   
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer '+this.token.getUser()["token"]})
   }
 
 
     readAll(): Observable<Usuario[]>{
-      return this.HttpClient.get<Usuario[]>(this.baseUrl)
+      console.log(this.token.getUser());
+      return this.HttpClient.get<Usuario[]>(this.baseUrl, this.httpOptions)
         .pipe(
             retry(2),
             catchError(this.handleError)
@@ -28,7 +32,7 @@ export class UsuarioService{
     }
 
     read(id): Observable<Usuario> {
-      return this.HttpClient.get<Usuario>(this.baseUrl +'/'+id)
+      return this.HttpClient.get<Usuario>(this.baseUrl +'/'+id, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -36,7 +40,7 @@ export class UsuarioService{
     }
 
     readCpf(cpf): Observable<Usuario> {
-      return this.HttpClient.get<Usuario>(this.baseUrl +'/cpf'+cpf)
+      return this.HttpClient.get<Usuario>(this.baseUrl +'/cpf'+cpf, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -68,7 +72,7 @@ export class UsuarioService{
     }
   
     vacinationConfirm(id): Observable<Usuario> {
-      return this.HttpClient.get<Usuario>(this.baseUrl+'/confirmar/'+id)
+      return this.HttpClient.get<Usuario>(this.baseUrl+'/confirmar/'+id, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -76,7 +80,7 @@ export class UsuarioService{
     }
 
     queue(): Observable<Usuario[]> {
-      return this.HttpClient.get<Usuario[]>(this.baseUrl+'/fila')
+      return this.HttpClient.get<Usuario[]>(this.baseUrl+'/fila', this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

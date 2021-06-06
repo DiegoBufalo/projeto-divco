@@ -57,11 +57,11 @@ export class CovidComponent implements OnInit {
           this.brasil.continent = data.All.continent;
           this.brasil.abbreviation = data.All.abbreviation;
           this.brasil.capital_city = data.All.capital_city;
-          this.brasil.actives = (data.All.confirmed - data.All.recovered);
-          this.brasil.percentActive = (100 - (100 * (data.All.recovered / data.All.confirmed)));
+          this.brasil.actives = (data.All.confirmed - data.All.recovered - data.All.deaths);
+          this.brasil.percentActive = (100 - (100 * (data.All.recovered / (data.All.confirmed -data.All.deaths))));
           this.brasil.percentRecovered = (100 * (data.All.recovered / data.All.confirmed));
           this.brasil.percentpopuCase = (100 * (data.All.confirmed / data.All.population));
-          this.brasil.percentdeaths = (100 * (data.All.deaths / data.All.confirmed))
+          this.brasil.percentdeaths = (100 * (data.All.deaths / data.All.confirmed));
 
           this.saoPaulo.confirmed = data["Sao Paulo"].confirmed;
           this.saoPaulo.deaths = data["Sao Paulo"].deaths;
